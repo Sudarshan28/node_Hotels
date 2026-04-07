@@ -26,5 +26,8 @@ db.on("error", (err) => {
 db.on("disconnected", () => {
   console.log("MongoDB disconnected");
 });
-
+mongoose.connect(mongoURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}); 
 module.exports = db;
