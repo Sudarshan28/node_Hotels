@@ -9,8 +9,6 @@ const mongoURL = process.env.DB_URL;
 //const mongoURL = process.env.DB_URL_LOCAL;
 
 // connect to MongoDB
-mongoose.connect(mongoURL);
-
 // connection object
 const db = mongoose.connection;
 
@@ -29,5 +27,5 @@ db.on("disconnected", () => {
 mongoose.connect(mongoURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}); 
+});
 module.exports = db;
