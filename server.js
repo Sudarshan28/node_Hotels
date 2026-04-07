@@ -70,35 +70,32 @@
 // console.log(typeof json);
 
 console.log("server file running");
-
-
 const express = require("express");
 const app = express();
-const db = require("./db");
+const connectDB = require("./db");
 require("dotenv").config();
 
 app.use(express.json());
 
-const PORT=process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
+const personRoutes = require("./routes/personRoutes");
+const menuRoutes = require("./routes/menuItemRoutes");
 
 app.get("/", (req, res) => {
   res.send("welcome to my hotel");
 });
 
-
-const personRoutes=require("./routes/personRoutes");
-app.use("/person", personRoutes);
-
-const menuRoutes = require("./routes/menuItemRoutes");
-app.use("/menu", menuRoutes);
-
 app.get("/test", (req, res) => {
   res.send("TEST OK");
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.use("/person", personRoutes);
+app.use("/menu", menuRoutes);
 
-//hi
+// ✅ Connect to DB first, then start server
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+});
