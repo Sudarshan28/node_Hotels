@@ -95,6 +95,9 @@ app.use("/person", personRoutes);
 const menuRoutes = require("./routes/menuItemRoutes");
 app.use("/menu", menuRoutes);
 
+app.get("/test", (req, res) => {
+  res.send("TEST OK");
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
